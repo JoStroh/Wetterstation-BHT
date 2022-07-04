@@ -1,0 +1,97 @@
+version: '3.9'
+networks:
+  BHT-Wetter-Net:
+    driver: bridge
+
+  
+
+services:
+  mosquitto:
+    container_name: mqtt
+    networks:
+      - BHT-Wetter-Net
+    restart: always
+    image: eclipse-mosquitto:latest
+    volumes:
+      - /home/BHT-Wetter/Docker/Mosquitto/data:/mosquitto/data:rw
+      - /home/BHT-Wetter/Docker/Mosquitto/conf:/mosquitto/config:rw
+      - /home/BHT-Wetter/Docker/Mosquitto/log:/mosquitto/log:rw
+    ports:
+        - 1883:1883
+        
+  mariaDB:
+    container_name: mariaDB
+    networks:
+      - BHT-Wetter-Net
+    restart: always
+    image: linuxserver/mariadb:latest
+    volumes:
+      - /home/BHT-Wetter/Docker/mariaDB:/config
+    ports:
+        - 3306:3306
+    environment:
+      MYSQL_DATABASE: BHT-Wetter
+      MYSQL_USER: Admin
+      MYSQL_PASSWORD: WCYQ94m95SLEnGLwm7Fz
+      MYSQL_ROOT_PASSWORD: k5eravGTLj8sLDcTMNXY
+      TZ: Europa/Berlin
+    deploy:
+      resources:  
+        limits:
+          memory: 200M  
+      
+  phpmyadmin:
+    container_name: phpMyAdmin
+    networks:
+      - BHT-Wetter-Net
+    restart: always
+    image: linuxserver/phpmyadmin
+    volumes:
+      - /home/BHT-Wetter/Docker/phpMyAdmin:/config
+    ports:
+      - 8080:80
+    environment:
+      TZ: Europa/Berlin
+      PMA_ARBITRARY: 1
+
+  nginx:
+    container_name: nginx
+    networks:
+      - BHT-Wetter-Net
+    ports:
+     - 80:80
+    restart: always
+    image: nginx:stable
+    volumes:
+      - /home/BHT-Wetter/Docker/Website:/var/www/html
+      - /home/BHT-Wetter/Docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    environment:
+      TZ: Europa/Berlin
+      
+  php:
+    networks:
+      - BHT-Wetter-Net
+    container_name: PHP
+    restart: always
+    image: php81-mysql
+    volumes:
+      - /home/BHT-Wetter/Docker/Website:/var/www/html
+
+
+  Python:
+    networks:
+      - BHT-Wetter-Net
+    container_name: Python
+    restart: always
+    image: python_cron:latest
+    volumes:
+      - /home/BHT-Wetter/Docker/Python/Skripte:/app
+      - /home/BHT-Wetter/Docker/Python/crontab:/etc/cron.d
+      - /etc/localtime:/etc/localtime
+    deploy:
+      resources:  
+        limits:
+          memory: 250M
+
+
+    

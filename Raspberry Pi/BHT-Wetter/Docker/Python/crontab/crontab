@@ -1,0 +1,6 @@
+@reboot sleep 10; /usr/local/bin/python /app/crontab.py > /proc/1/fd/1 2>/proc/1/fd/2
+*/5 * * * * /usr/local/bin/python /app/Temp_Hum_Pres.py > /proc/1/fd/1 2>/proc/1/fd/2
+*/5 * * * * /usr/local/bin/python /app/Rain.py > /proc/1/fd/1 2>/proc/1/fd/2
+*/5 * * * * /usr/local/bin/python /app/Wind.py > /proc/1/fd/1 2>/proc/1/fd/2
+*/5 * * * * /usr/local/bin/python /app/Validation.py > /proc/1/fd/1 2>/proc/1/fd/2
+*/5 * * * * /usr/local/bin/python /app/OpenSenseMap.py > /proc/1/fd/1 2>/proc/1/fd/2

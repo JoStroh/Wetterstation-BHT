@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BHT-Wetter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<!--Funktion für die Auswahl der iframes in der Navigationsbar -->
+<script>
+    function select(object){
+        document.getElementById("Data_page").src = object.href;
+        return false;}
+</script>
+
+<!--beginn der Visualisierung der Website-->
+<body>
+
+    <div class="black_bar">  </div> 
+
+<!--Kofzeile mit Logo und Überschrift-->    
+    <header>
+        <div class="Logo"><img src="Images/BHT_Logo_print.png" style="max-width: 60%;height: auto;" ></div>
+        <h1>Wetterstation</h1>
+    </header>
+
+    <div class="black_bar2">  </div>  
+
+    <main>
+<!--Navigationsbar für die Auswahl der Themen-->        
+        <div class="nav_bar">
+            <nav>
+                <ul>
+                    <li><a href="Temperaturpage.php" onclick ="return select(this)">Temperatur</a></li>
+                    <li><a href="Feuchtigkeitpage.php" onclick ="return select(this)">Luftfeuchtigkeit</a></li>
+                    <li><a href="Druckpage.php" onclick ="return select(this)">Druck</a></li>
+                    <li><a href="Regenpage.php" onclick ="return select(this)">Niederschlag</a></li>
+                    <li><a href="Windpage.php" onclick ="return select(this)">Wind</a></li>
+                    <li><a href="https://opensensemap.org/explore/629b506c87a60b001cd2bb30">OpenSenseMap</a></li>
+                </ul>
+            </nav>
+        </div>    
+<!-- Definition des Datenbereichs und des iframes-->
+        <div class="data_space">
+            <iframe id="Data_page" src="Temperaturpage.php" width="100%" height="100%" frameborder="0px"></iframe>
+            
+        </div> 
+    </main>
+    <div class="black_bar2">  </div> 
+
+<!--Impressum-->    
+    <div class="impressum">
+    <h3>Impressum:</h3>
+    <p>Diese Website ist Teil einer Masterarbeit zur Erreichung des Grades „Master of Science“.</p>
+    <p>Thema: Entwicklung einer Wetterstation mit Zusatzsensorik auf der Basis eines Raspberry Pi's und Opensource-Komponenten</p>
+    <p>Autor: Jonas Strohbusch</p>
+    <p>letzte Aktualisierung: 08.06.2022</p> 
+    </div>      
+       
+</body>
+</html>
+

@@ -1,0 +1,27 @@
+#Grundimage
+FROM python:3.9-slim
+
+#Installiere cron und Nano (für bessere Arbeit im Container)
+RUN apt-get -y update
+RUN apt-get install -y cron
+RUN apt-get install -y nano
+
+#Installiere benötigte Python Bibs
+RUN pip3 install paho-mqtt
+RUN pip3 install mysql-connector
+RUN pip3 install pytz
+RUN pip3 install python-dateutil
+RUN pip3 install requests
+
+#Setze den Arbeitsordner im Container
+WORKDIR /app
+
+#Kopiere die Fiels in den Container
+#(da die WORKDIR gesetzt wurde reicht der "." als Pfadangabe)
+COPY crontab.py .
+COPY crontab /etc/cron.d/crontab
+
+#Starte den Cronjob
+RUN chmod 0644 /etc/cron.d/crontab
+RUN /usr/bin/crontab /etc/cron.d/crontab
+CMD cron -f
