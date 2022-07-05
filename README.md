@@ -9,4 +9,4 @@ Technische Grundlage für die Arbeit war ein Raspbbery Pi 3B+, ein Arduino Uno m
 
 ## !Achtung!
 
-Das Klonen des Repositorys führt nicht zu einem Funktionierenden System. Das System wurde nicht komplett auf GitHub veröffentlicht und die Files dienen nur dem Nachvollziehen der gemachten Schritte.
+Das Klonen des Repositorys führt nicht zu einem funktionierenden System. Das System wurde nicht komplett auf GitHub veröffentlicht und die Files dienen nur dem Nachvollziehen der gemachten Schritte.
